@@ -1,0 +1,14 @@
+public class SplitCommaText {
+    @InvocableMethod(label='Split Comma-Separated Text')
+    public static List<List<String>> split(List<String> inputs) {
+        List<List<String>> result = new List<List<String>>();
+        for (String input : inputs) {
+            if (String.isBlank(input)) {
+                result.add(new List<String>());
+            } else {
+                result.add(input.split(','));
+            }
+        }
+        return result;
+    }
+}

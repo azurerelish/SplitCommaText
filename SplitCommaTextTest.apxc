@@ -1,0 +1,53 @@
+@IsTest
+public class SplitCommaTextTest {
+    
+    @IsTest
+    static void testSplitCommaSeparatedText() {
+        // Test normal comma-separated text
+        List<String> inputs = new List<String>{'apple,banana,cherry'};
+        
+        Test.startTest();
+        List<List<String>> result = SplitCommaText.split(inputs);
+        Test.stopTest();
+        
+        Assert.areEqual(1, result.size());
+        Assert.areEqual(3, result[0].size());
+        Assert.areEqual('apple', result[0][0]);
+        Assert.areEqual('banana', result[0][1]);
+        Assert.areEqual('cherry', result[0][2]);
+    }
+    
+    @IsTest
+    static void testSplitBlankAndNormalInputs() {
+        // Test blank string and normal input to cover both branches
+        List<String> inputs = new List<String>{'', 'test,value'};
+        
+        Test.startTest();
+        List<List<String>> result = SplitCommaText.split(inputs);
+        Test.stopTest();
+        
+        Assert.areEqual(2, result.size());
+        
+        // First input is blank - should return empty list
+        Assert.areEqual(0, result[0].size());
+        
+        // Second input has comma - should be split
+        Assert.areEqual(2, result[1].size());
+        Assert.areEqual('test', result[1][0]);
+        Assert.areEqual('value', result[1][1]);
+    }
+    
+    @IsTest
+    static void testSplitSingleItem() {
+        // Test single item without commas
+        List<String> inputs = new List<String>{'singleitem'};
+        
+        Test.startTest();
+        List<List<String>> result = SplitCommaText.split(inputs);
+        Test.stopTest();
+        
+        Assert.areEqual(1, result.size());
+        Assert.areEqual(1, result[0].size());
+        Assert.areEqual('singleitem', result[0][0]);
+    }
+}
